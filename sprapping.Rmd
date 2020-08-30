@@ -1,0 +1,47 @@
+
+```{r}
+##
+install.packages("seleniumPipes")
+library(seleniumPipes)
+links <- data.frame(url=character(0))
+
+rD1 <- rsDriver(browser = "chrome", port = 4549L, geckover = NULL, 
+                chromever =  "84.0.4147.30", iedrver = NULL, 
+                phantomver = NULL)
+
+remDr1 <- rD1[["client"]]
+```
+
+
+```{r}
+url <- "https://senado.cl/senado/site/edic/base/port/senadores.html"
+remDr1$navigate(url)
+
+urls <- c()
+str1 <- "[class='"
+str2 <- "']"
+
+
+
+clase <- "s0 s"
+clase <- paste(clase,toString(i), sep="")
+webEles <- remDr1$findElement(using = "css",value = paste(str1,clase,str2, sep=""))
+webEles$clickElement()
+nombre <- remDr1$findElement(using = "css",value = "[class='serif']")
+nombre <- nombre$getElementText()
+partido <- datos[[18]]$getElementText() 
+telefono <- datos[[19]]$getElementText() 
+mail <- datos[[20]]$getElementText() 
+remDr1$navigate('https://www.google.com/')
+
+buscar <- remDr1$findElement(using="css", value = "[class='gLFyf gsfi']")
+buscar$clickElement()
+buscar$sendKeysToElement(c(nombre,key = "enter"))
+
+urls[[i]] <- getElementAttribute(webEles,'href')
+
+
+for (i in 1:43){
+  }
+```
+
